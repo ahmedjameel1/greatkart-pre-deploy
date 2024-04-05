@@ -16,7 +16,7 @@ from django.core.mail import EmailMessage
 
 from carts.views import _cart_id
 from carts.models import Cart, CartItem
-import requests
+# import requests
 
 
 def register(request):
@@ -113,7 +113,7 @@ def login(request):
             messages.success(request, 'You are now logged in.')
             url = request.META.get('HTTP_REFERER')
             try:
-                query = requests.utils.urlparse(url).query
+                query = request.GET['query']
                 # next=/cart/checkout/
                 params = dict(x.split('=') for x in query.split('&'))
                 if 'next' in params:
